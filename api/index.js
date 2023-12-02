@@ -6,6 +6,7 @@ dotenv.config();
 
 import userRouter from './routes/user.route.js';
 
+import authRouter from './routes/auth.route.js';
 
 mongoose.connect(process.env.MONGODB).then(()=>{
         console.log("CONNECTED TO MONGODB");
@@ -16,9 +17,13 @@ mongoose.connect(process.env.MONGODB).then(()=>{
 
 const app = express();
 
+app.use(express.json());
+
 app.listen(3000, ()=>{
     console.log("SERVER STARTED ON PORT 3000");
 });
 
 
 app.use('/api/user', userRouter);
+
+app.use('/api/auth', authRouter);
