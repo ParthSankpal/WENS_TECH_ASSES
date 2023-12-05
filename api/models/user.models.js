@@ -14,7 +14,11 @@ const userschema = new mongoose.Schema({
     password:{
         type: String,
         required: true,
-    }
+    },
+    avatar:{
+        type: String,
+        default: 'https://png.pngtree.com/background/20230613/original/pngtree-low-picture-image_3429782.jpg',
+    },
     
 }, {timestamps: true});
 
