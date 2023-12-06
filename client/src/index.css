@@ -7,3 +7,10 @@
 body{
     background-color: rgb(241, 245, 241);
 }
+
+@font-face {
+    font-family: Higuen;
+    src: url("./assets/fonts/Higuen Serif.otf") format("opentype");
+    font-family: Norwester;
+    src: url("./assets/fonts/norwesterregular-j5r9-webfont.woff") format("opentype");
+  }

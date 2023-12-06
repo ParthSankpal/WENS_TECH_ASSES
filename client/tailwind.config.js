@@ -6,6 +6,13 @@ export default {
   ],
   theme: {
     extend: {},
+    fontFamily: {
+      Higuen:"Higuen",
+      Norwester:'Norwester',
+      Rubik:['sans-serif'],
+      Tilt_Prism:['cursive'],
+      Outfit:['sans-serif']
+    },
   },
   plugins: [],
 }
