@@ -8,9 +8,15 @@ import {
 } from "firebase/storage";
 import { app } from "../firebase";
 
-import { updateUserFailure,updateUserStart, updateUserSuccess } from "../redux/user/userSlice";
+import {
+  updateUserFailure,
+  updateUserStart,
+  updateUserSuccess,
+  deleteUserFailure,
+  deleteUserSuccess,
+  deleteUserStart,
+} from "../redux/user/userSlice";
 import { useDispatch } from "react-redux";
-
 
 const Profile = () => {
   const fileRef = useRef(null);
@@ -31,7 +37,6 @@ const Profile = () => {
   // console.log(file);
 
   const dispatch = useDispatch();
-
 
   const [updateSuccess, setUpdateSuccess] = useState(false);
 
@@ -65,8 +70,7 @@ const Profile = () => {
     );
   };
 
-
-  const handleChange = (e)=>{
+  const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
 
@@ -75,9 +79,9 @@ const Profile = () => {
     try {
       dispatch(updateUserStart());
       const res = await fetch(`/api/user/update/${currentUser._id}`, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
       });
@@ -93,6 +97,24 @@ const Profile = () => {
       dispatch(updateUserFailure(error.message));
     }
   };
+
+   const handleDeleteUser = async () => {
+    try {
+      dispatch(deleteUserStart());
+      const res = await fetch(`/api/user/delete/${currentUser._id}`, {
+        method: 'DELETE',
+      });
+      const data = await res.json();
+      if (data.success === false) {
+        dispatch(deleteUserFailure(data.message));
+        return;
+      }
+      dispatch(deleteUserSuccess(data));
+    } catch (error) {
+      dispatch(deleteUserFailure(error.message));
+    }
+  };
+
 
   return (
     <div className="font-Higuen p-3 max-w-lg mx-auto">
@@ -114,17 +136,17 @@ const Profile = () => {
           className=" rounded-full h-24 w-24 object-cover cursor-pointer self-center mt-4"
         />
 
-        <p className='text-sm self-center'>
-        {fileUploadError ? (
-            <span className='text-red-700'>
+        <p className="text-sm self-center">
+          {fileUploadError ? (
+            <span className="text-red-700">
               Error Image upload (image must be less than 2 mb)
             </span>
           ) : filePercentage > 0 && filePercentage < 100 ? (
-            <span className='text-green-700'>{`Uploading ${filePercentage}%`}</span>
+            <span className="text-green-700">{`Uploading ${filePercentage}%`}</span>
           ) : filePercentage === 100 ? (
-            <span className='text-green-700'>Image successfully uploaded!</span>
+            <span className="text-green-700">Image successfully uploaded!</span>
           ) : (
-            ''
+            ""
           )}
         </p>
 
@@ -154,18 +176,28 @@ const Profile = () => {
           onChange={handleChange}
         />
 
-        <button disabled={loading} className="bg-slate-700 text-white rounded-lg p-3 uppercase hover:opacity-95 disabled:opacity-80">
+        <button
+          disabled={loading}
+          className="bg-slate-700 text-white rounded-lg p-3 uppercase hover:opacity-95 disabled:opacity-80"
+        >
           {loading ? "Loading..." : "update"}
         </button>
       </form>
 
       <div className=" flex justify-between mt-5">
-        <span className=" text-red-700 cursor-pointer">Delete Account</span>
+        <span
+          onClick={handleDeleteUser}
+          className=" text-red-700 cursor-pointer"
+        >
+          Delete Account
+        </span>
         <span className=" text-red-700 cursor-pointer">Sign out</span>
       </div>
 
       <p className=" text-red-700 mt-5">{error ? error : ""}</p>
-      <p className=" text-green-700 mt-5">{updateSuccess ? "User Updated" : ""}</p>
+      <p className=" text-green-700 mt-5">
+        {updateSuccess ? "User Updated" : ""}
+      </p>
     </div>
   );
 };
