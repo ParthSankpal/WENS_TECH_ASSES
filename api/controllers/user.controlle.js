@@ -1,7 +1,7 @@
 import bcryptjs from 'bcryptjs';
 import User from '../models/user.models.js';
 import { errorHandler } from '../utils/error.js';
-import { response } from 'express';
+import Listing from '../models/listing.model.js';
 
 
 
@@ -54,3 +54,23 @@ export const updateUser = async (req, res, next) => {
       next(error);
     }
   };
+
+
+  export const getUserListin = async(req, res, next)=>{
+
+    if(req.user.id === req.params.id){
+
+      try {
+
+        const listings = await Listing.find({ userRef: req.params.id });
+      res.status(200).json(listings);
+        
+      } catch (error) {
+        next(error);
+      }
+
+    }else{
+      return next(errorHandler(401, 'You can only view your own listings'))
+    }
+
+  }
