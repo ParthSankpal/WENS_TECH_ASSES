@@ -56,7 +56,7 @@ export const deleteListing = async (req, res, next) => {
   export const getListing = async (req, res, next) => {
     try {
       const listing = await Listing.findById(req.params.id); 
-
+// console.log(listing, req.params.id);
       if(!listing){
         return next(errorHandler(404, "Listing not found"))
       }
