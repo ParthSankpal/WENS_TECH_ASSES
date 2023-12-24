@@ -12,6 +12,8 @@ import listingRouter from './routes/listing.route.js';
 
 import cookieParser from 'cookie-parser';
 
+import path from 'path';
+
 mongoose.connect(process.env.MONGODB).then(()=>{
         console.log("CONNECTED TO MONGODB");
     }).catch(err=>{
