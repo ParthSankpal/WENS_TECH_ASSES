@@ -60,7 +60,7 @@ useEffect(() => {
           Your Gateway to Seamless Real Estate Solutions.{" "}
         </h1>
         <div className=" text-gray-400 text-xs sm:text-sm">
-          "Discover a world of possibilities with VasudhaEstate, where every
+          Discover a world of possibilities with VasudhaEstate, where every
           listing is a key to exceptional living. We specialize in unlocking the
           door to your dream home or investment, offering seamless real estate
           solutions tailored to your needs.
