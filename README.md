@@ -33,6 +33,7 @@ Deploying MERN real estate app for free using the 'render' platform.
   - MongoDB
   - BcryptJS
   - JSON Web Token (JWT)
+  - Firebase Storage
 
 - **Authentication:**
   - Firebase Authentication for Google Sign-In
