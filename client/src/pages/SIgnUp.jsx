@@ -5,7 +5,7 @@ import OAuth from '../components/OAuth';
 
 
 
-const SIgnUp = () => {
+const SignUp = () => {
 
   const [fomrData, setFormData] = useState({});
 
@@ -104,4 +104,4 @@ const SIgnUp = () => {
   )
 }
 
-export default SIgnUp
+export default SignUp
