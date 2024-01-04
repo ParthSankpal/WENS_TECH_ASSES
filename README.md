@@ -39,4 +39,4 @@ Deploying MERN real estate app for free using the 'render' platform.
   - Firebase Authentication for Google Sign-In
 
 ## 🌐 Live Demo
-Explore the live demo of VasudhaEstate on [GitHub Pages](https://github.com/sahandghavidel/mer...)
+Explore the live demo of VasudhaEstate on [https://vasudhaestate.onrender.com/](https://vasudhaestate.onrender.com/)
