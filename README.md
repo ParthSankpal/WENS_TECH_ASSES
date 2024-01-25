@@ -20,3 +20,7 @@ CRUD operations by creating, reading, updating, and deleting property listings u
   - BcryptJS
   - JSON Web Token (JWT)
   - Firebase Storage
+
+# Task no 5 is in the add.js file
+function that adds two numbers together in JavaScript. Use a
+testing framework like Jest.
