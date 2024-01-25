@@ -33,18 +33,17 @@ const Post = () => {
         const postData = await postRes.json();
         if (postRes.ok) {
           setPostData(postData);
+          setIsLiked(postData.likes.includes(currentUser._id)); // Set isLiked
+          setLikeCount(postData.likes.length); // Set likeCount
         } else {
           throw new Error(postData.message || 'Failed to fetch post');
         }
-
+  
         // Fetch comments
         const commentsRes = await fetch(`/api/comments/get/${params.postId}`);
         const commentsData = await commentsRes.json();
         if (commentsRes.ok) {
           setPostCommentData(commentsData);
-          const totalLikes = commentsData.reduce((acc, comment) => acc + comment.numberOfLikes, 0);
-          setLikeCount(totalLikes);
-          console.log(setLikeCount, "NO OF LIKES");
         } else {
           throw new Error(commentsData.message || 'Failed to fetch comments');
         }
@@ -55,8 +54,8 @@ const Post = () => {
       setLoading(false);
     };
     fetchPostAndComments();
-  }, [params.postId]);
-
+  }, [params.postId, currentUser._id]); // Added currentUser._id as a dependency
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -130,16 +129,17 @@ const Post = () => {
         <p className=" py-5">Category: {postData.category}</p>
         <div>{postData.content}</div>
       </div>
-      <div>
-    <AiOutlineLike onClick={handleLikeClick} style={{ cursor: 'pointer' }} />
-    {likeCount > 0 ? likeCount : "No likes yet"}
+      <div className=" flex align-middle items-center gap-3">
+    <AiOutlineLike onClick={handleLikeClick} style={{ cursor: 'pointer' }} className={`${likeCount > 0 ? "text-green-700" : "text-red-500"} text-2xl`}/>
+    <span className={`${likeCount > 0 ? "text-green-700" : "text-red-500"}`}>{likeCount > 0 ? likeCount : "No likes yet"}</span>
+
 </div>
 
       </div>
 
-      <div className=" w-full  ">
-        <div className=" p-5 bg-slate-400 rounded-lg">
-        <h3 className=" py-4">Comments:</h3>
+      <div className=" w-full  mt-12 pt-6">
+        <div className=" p-5 bg-slate-100 rounded-lg">
+        <h3 className=" py-4 text-lg">Comments:</h3>
         {postCommentData.length > 0 ? (
           postCommentData.map((comment, index) => (
             <div key={index} className=" px-4 py-4">
