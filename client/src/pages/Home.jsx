@@ -1,67 +1,52 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation } from 'swiper/modules';
-import SwiperCore from 'swiper';
-import 'swiper/css/bundle';
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation } from "swiper/modules";
+import { useSelector } from "react-redux";
+import PostItem from "../components/PostItems";
+import SwiperCore from "swiper";
+import "swiper/css/bundle";
 
 const Home = () => {
+  const { currentUser } = useSelector((state) => state.user);
+  // console.log(currentUser);
+  const [userPosts, setUserPosts] = useState([]);
+  const allPostIds = userPosts.map((post) => post._id);
+  console.log(userPosts, "USERPOSTS");
+  console.log(userPosts._id, "USERPOSTSID");
 
-  const [offerListings, setOfferListings] = useState([]);
-  const [saleListings, setSaleListings] = useState([]);
-  const [rentListings, setRentListings] = useState([]);
+  for (let post of userPosts) {
+    console.log(post._id, "will log the '_id' of each post in the array"); // will log the '_id' of each post in the array
+  }
   SwiperCore.use([Navigation]);
-console.log(saleListings);
 
-useEffect(() => {
-  const fetchOfferListings = async () => {
-    try {
-      const res = await fetch('/api/listing/get?offer=true&limit=3');
-      const data = await res.json();
-      setOfferListings(data);
-      fetchRentListings();
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  const fetchRentListings = async () => {
-    try {
-      const res = await fetch('/api/listing/get?type=rent&limit=3');
-      const data = await res.json();
-      setRentListings(data);
-      fetchSaleListings();
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  useEffect(() => {
+    const fetchUserPosts = async () => {
+      try {
+        const res = await fetch(`/api/post/get/user/${currentUser._id}`);
+        const data = await res.json();
+        setUserPosts(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
 
-  const fetchSaleListings = async () => {
-    try {
-      const res = await fetch('/api/listing/get?type=sale&limit=3');
-      const data = await res.json();
-      setSaleListings(data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  fetchOfferListings();
-}, []);
+    fetchUserPosts();
+  }, []);
 
   return (
     <div className=" font-Raleway">
       {/* top */}
       <div className=" flex flex-col gap-6 py-28 px-4 max-w-6xl mx-auto">
         <h1 className=" text-slate-700 font-bold text-3xl lg:text-6xl">
-        StoryStream: Weaving Narratives, Connecting Worlds – Your Digital Diary of Diverse Tales.
-          
+          StoryStream: Weaving Narratives, Connecting Worlds – Your Digital
+          Diary of Diverse Tales.
         </h1>
-        
-        
       </div>
 
       {/* swiper */}
 
-      <Swiper navigation>
+      {/* <Swiper navigation>
         {offerListings &&
           offerListings.length > 0 &&
           offerListings.map((listing) => (
@@ -76,11 +61,22 @@ useEffect(() => {
               ></div>
             </SwiperSlide>
           ))}
-      </Swiper>
+      </Swiper> */}
 
-
-
-    
+      <div className="max-w-6xl mx-auto p-3 flex flex-col gap-8 my-10">
+        <div className="">
+          <div className="my-3">
+            <h2 className="text-2xl font-semibold text-slate-600">
+              Your Posts
+            </h2>
+          </div>
+          <div className="flex flex-wrap md:flex-nowrap gap-4">
+            {userPosts.map((post) => (
+              <PostItem key={post._id} post={post} />
+            ))}
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

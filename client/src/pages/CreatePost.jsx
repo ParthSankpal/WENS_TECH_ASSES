@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 export default function CreatePost() {
   const { currentUser } = useSelector((state) => state.user);
+  // console.log(currentUser, "Current User");
   const navigate = useNavigate();
   const [file, setFile] = useState(null);
   const [formData, setFormData] = useState({
@@ -13,7 +14,7 @@ export default function CreatePost() {
     content: '',
     image: '',
     category: 'uncategorized',
-    slug: '',
+    
   });
   const [imageUploadError, setImageUploadError] = useState(false);
   const [uploading, setUploading] = useState(false);
@@ -69,7 +70,7 @@ export default function CreatePost() {
       ...formData,
       [e.target.name]: e.target.value,
     });
-    console.log(formData);
+    // console.log(formData);
   };
 
   const handleSubmit = async (e) => {
@@ -80,14 +81,18 @@ export default function CreatePost() {
     try {
       // Add your API request logic here to create a new post
       // For example:
-      // const res = await fetch('/api/posts/create', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify({ ...formData, userId: currentUser._id }),
-      // });
+      const res = await fetch('/api/post/create', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...formData, userId: currentUser._id }),
+      });
 
-      setLoading(false);
-      navigate('/'); // Navigate to the desired page after success
+      const data = await res.json();
+      if(data) {
+
+        setLoading(false);
+        navigate('/'); // Navigate to the desired page after success
+      }
     } catch (error) {
       setError('Failed to create post');
       setLoading(false);

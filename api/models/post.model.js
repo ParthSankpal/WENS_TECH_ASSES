@@ -20,6 +20,10 @@ const postSchema = new mongoose.Schema(
       type: String,
       default: 'uncategorized',
     },
+    content : {
+      type : String,
+      required: true,
+    }
     
   },
   { timestamps: true }

@@ -31,7 +31,7 @@ app.use(express.json());
 
 app.use(cookieParser());
 
-app.listen(3001, ()=>{
+app.listen(3000, ()=>{
     console.log("SERVER STARTED ON PORT 3000");
 });
 
