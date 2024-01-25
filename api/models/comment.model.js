@@ -6,18 +6,16 @@ const commentSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    postId: {
-      type: String,
+    postId: {  // REFERENCING FROM POST SCHEMA
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Post',
       required: true,
-    },
+  },
     userId: {
       type: String,
       required: true,
     },
-    likes: {
-      type: Array,
-      default: [],
-    },
+    
     numberOfLikes: {
       type: Number,
       default: 0,

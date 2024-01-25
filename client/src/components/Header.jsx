@@ -70,7 +70,7 @@ const Header = () => {
             </li>
           </Link>
 
-          <Link to="about">
+          <Link to="#">
             <li className=" hidden sm:inline text-white hover:underline hover:text-slate-400">
               About
             </li>

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const PostItem = ({ post }) => {
   return (
     <div className="bg-white shadow-md hover:shadow-lg transition-shadow overflow-hidden rounded-lg sm:w-[400px]">
-      {/* <Link to={`/post/${post._id}`}> */}
+      <Link to={`/post/${post._id}`}>
         <img
           src={post.image || "https://via.placeholder.com/400"}
           alt="post cover"
@@ -22,7 +22,7 @@ const PostItem = ({ post }) => {
           </p>
           {/* Additional post details can be added here */}
         </div>
-      {/* </Link> */}
+      </Link>
     </div>
   );
 };

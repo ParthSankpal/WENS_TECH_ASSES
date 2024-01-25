@@ -24,3 +24,47 @@ export const getPostsByUser = async (req, res) => {
       res.status(500).json({ message: error.message });
     }
   };
+
+  export const getPostDetails = async (req, res) => {
+    try {
+      const postId = req.params.postId;
+      const post = await Post.findById(postId);
+      
+      // console.log(post, "POST DATA");
+      return res.status(200).json(post);
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+  }
+
+
+  export const likePost = async (req, res) => {
+    const postId = req.params.postId;
+    const userId = req.body.userId;
+
+    try {
+        // Find the post by ID
+        const post = await comment.findById(postId);
+
+        if (!post) {
+            return res.status(404).json({ message: 'Post not found' });
+        }
+
+        // Check if the user has already liked the post
+        const index = post.likes.findIndex((id) => id === String(userId));
+
+        if (index === -1) {
+            // Like the post
+            post.likes.push(userId);
+        } else {
+            // Dislike the post
+            post.likes = post.likes.filter((id) => id !== String(userId));
+        }
+
+        const updatedPost = await Post.findByIdAndUpdate(postId, post, { new: true });
+        
+        res.status(200).json(updatedPost);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};

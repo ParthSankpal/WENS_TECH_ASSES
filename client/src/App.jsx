@@ -11,6 +11,7 @@ import Header from "./components/Header";
 import PrivateRoute from "./components/PrivateRoute";
 import Search from "./pages/Search";
 import CreatePost from "./pages/CreatePost";
+import Post from "./pages/Post";
 
 const App = () => {
   return (
@@ -23,7 +24,7 @@ const App = () => {
         
         <Route path="/about" element={<About />} />
         <Route path='/search' element={<Search />} />
-
+        <Route path="/post/:postId" element={<Post/>}/>
         <Route element={<PrivateRoute />}>
           <Route path="/profile" element={<Profile />} />
           <Route path="create-post" element={<CreatePost />} />
