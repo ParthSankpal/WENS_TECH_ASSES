@@ -36,16 +36,16 @@ const Header = () => {
   }, [location.search]);
 
   return (
-    <header className="font-Higuen bg-slate-200 shadow-md ">
-      <div className=" flex justify-between items-center max-w-6xl mx-auto p-3">
+    <header className=" font-Raleway bg-slate-700 shadow-md ">
+      <div className=" flex justify-between items-center max-w-6xl mx-auto p-5">
         <Link to="/">
           <h1 className=" font-bold text-sm sm:text-xl flex flex-wrap ">
-            <span className="text-slate-500">Vasudhā</span>
-            <span className=" text-slate-700">Estate</span>
+            <span className="text-slate-200">Story</span>
+            <span className=" text-white">Stream</span>
           </h1>
         </Link>
 
-        <form
+        {/* <form
           action=""
           className=" bg-slate-100 p-3 rounded-lg flex items-center"
 
@@ -61,17 +61,17 @@ const Header = () => {
           <button>
             <FaSearch className=" text-slate-600" />
           </button>
-        </form>
+        </form> */}
 
         <ul className=" flex gap-4">
           <Link to="/">
-            <li className=" hidden sm:inline text-slate-700 hover:underline hover:text-slate-400">
+            <li className=" hidden sm:inline text-white hover:underline hover:text-slate-400">
               Home
             </li>
           </Link>
 
           <Link to="about">
-            <li className=" hidden sm:inline text-slate-700 hover:underline hover:text-slate-400">
+            <li className=" hidden sm:inline text-white hover:underline hover:text-slate-400">
               About
             </li>
           </Link>

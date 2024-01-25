@@ -249,9 +249,9 @@ const Profile = () => {
         </button>
         <Link
           className=" bg-green-700 text-white p-3 rounded-lg uppercase text-center hover:opacity-95"
-          to={"/create-listing"}
+          to={"/create-post"}
         >
-          Create
+          Create Post
         </Link>
       </form>
 
@@ -272,7 +272,7 @@ const Profile = () => {
         {updateSuccess ? "User Updated" : ""}
       </p>
       <button onClick={handleShowListings} className="text-green-700 w-full">
-        Show Listings
+        Show Posts
       </button>
       <p className="text-red-700 mt-5">
         {showListingsError ? "Error showing listings" : ""}
@@ -280,7 +280,7 @@ const Profile = () => {
       {userListings && userListings.length > 0 && (
         <div className='flex flex-col gap-4'>
           <h1 className='text-center mt-7 text-2xl  font-extralight'>
-            Your Listings
+            Your Posts
           </h1>
           {userListings.map((listing) => (
             <div

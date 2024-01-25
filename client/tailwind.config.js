@@ -11,7 +11,8 @@ export default {
       Norwester:'Norwester',
       Rubik:['sans-serif'],
       Tilt_Prism:['cursive'],
-      Outfit:['sans-serif']
+      Outfit:['sans-serif'],
+      Raleway : ['sans-serif']
     },
   },
   // plugins: [
